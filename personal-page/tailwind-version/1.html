@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leon - Web Developer</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .fade-in-down {
+            animation: fadeInDown 1s ease-out;
+        }
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out;
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-300 font-roboto flex flex-col items-center justify-center min-h-screen text-center">
+    <header class="w-full bg-cover bg-center h-screen relative" style="background-image: url('https://via.placeholder.com/1920x1080');">
+        <div class="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center">
+            <h1 class="text-6xl md:text-8xl text-white fade-in-down">Leon</h1>
+            <p class="text-xl md:text-2xl text-gray-300 mt-4 fade-in-up">Web Developer from Germany</p>
+        </div>
+    </header>
+
+    <main class="w-full max-w-4xl mx-auto px-6 py-12 bg-gray-800 rounded-lg shadow-lg -mt-20 z-10 relative">
+        <section id="about" class="mb-16">
+            <h2 class="text-3xl md:text-4xl text-blue-400 border-b-2 border-blue-400 pb-2 inline-block mb-8">About Me</h2>
+            <p class="text-lg md:text-xl leading-relaxed">Hi, I'm Leon, a passionate web developer from Germany. I specialize in creating clean, efficient, and user-friendly websites. With a strong background in both front-end and back-end development, I enjoy building everything from small business sites to rich interactive web apps.</p>
+        </section>
+
+        <section id="contact">
+            <h2 class="text-3xl md:text-4xl text-blue-400 border-b-2 border-blue-400 pb-2 inline-block mb-8">Contact</h2>
+            <p class="text-lg md:text-xl leading-relaxed">You can reach me via email at <a href="mailto:leon@example.com" class="text-blue-400 hover:text-blue-300">leon@example.com</a>.</p>
+            <div class="mt-8 flex justify-center space-x-6">
+                <a href="https://twitter.com/yourusername" target="_blank" class="text-blue-400 text-2xl hover:text-blue-300">Twitter</a>
+                <a href="https://linkedin.com/in/yourusername" target="_blank" class="text-blue-400 text-2xl hover:text-blue-300">LinkedIn</a>
+                <a href="https://github.com/yourusername" target="_blank" class="text-blue-400 text-2xl hover:text-blue-300">GitHub</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="mt-12 text-sm text-gray-500">
+        <p>&copy; 2024 Leon. All rights reserved.</p>
+    </footer>
+</body>
+</html>
