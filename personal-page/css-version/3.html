@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leon - Web Developer</title>
+    <!-- External Libraries -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f9;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: #333;
+            padding: 1rem 2rem;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: #f4f4f9;
+            margin: 0 1rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #ffd700;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #f4f4f9;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .navbar-logo:hover {
+            color: #ffd700;
+        }
+
+        .navbar-menu {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            background-color: #333;
+            width: 100%;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-menu a {
+            margin: 1rem 0;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: #f4f4f9;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-menu {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .navbar-menu.active {
+                display: flex;
+            }
+
+            .navbar a {
+                display: none;
+            }
+        }
+
+        /* Header Styles */
+        .header {
+            text-align: center;
+            padding: 10rem 2rem 5rem;
+            background: linear-gradient(135deg, #6b0f1a, #b91372);
+            color: #f4f4f9;
+            background-image: url('https://images.unsplash.com/photo-1506784983877-45594efa4cbe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDEwfHx3ZWJ8ZW58MHx8fHwxNjIwMTg1NTY3&ixlib=rb-1.2.1&q=80&w=1080');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            font-size: 1.25rem;
+        }
+
+        /* Section Styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            padding: 4rem 1rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #333;
+            text-align: center;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            width: 50px;
+            height: 4px;
+            background: #ffd700;
+            display: block;
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            color: #555;
+        }
+
+        /* Projects and Blog Styles */
+        .projects,
+        .blog {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: #fff;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            flex: 1 1 calc(30% - 2rem);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        }
+
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .card p {
+            color: #777;
+        }
+
+        .card .tags {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card .tags span {
+            background-color: #b91372;
+            color: #f4f4f9;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            margin: 0.2rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                flex: 1 1 calc(45% - 2rem);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                flex: 1 1 100%;
+            }
+        }
+
+        /* Skills Section */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .skill {
+            background-color: #fff;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            flex: 1 1 calc(30% - 2rem);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .skill:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill i {
+            font-size: 3rem;
+            color: #b91372;
+            margin-bottom: 1rem;
+        }
+
+        .skill h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .skill p {
+            color: #777;
+        }
+
+        @media (max-width: 768px) {
+            .skill {
+                flex: 1 1 calc(45% - 2rem);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .skill {
+                flex: 1 1 100%;
+            }
+        }
+
+        /* Carousel Styles */
+        .carousel {
+            margin: 2rem 0;
+        }
+
+        .slick-prev:before,
+        .slick-next:before {
+            color: #333;
+        }
+
+        /* Contact Section */
+        #contact p a {
+            color: #b91372;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        #contact p a:hover {
+            color: #6b0f1a;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .contact-form button {
+            background-color: #b91372;
+            color: #f4f4f9;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .contact-form button:hover {
+            background-color: #6b0f1a;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #333;
+            color: #f4f4f9;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer .social-icons a {
+            margin: 0 0.5rem;
+            color: #f4f4f9;
+            transition: color 0.3s;
+        }
+
+        .footer .social-icons a:hover {
+            color: #ffd700;
+        }
+
+        .footer p {
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="navbar-logo">
+            <img src="https://via.placeholder.com/40" alt="Logo"> Leon Dev
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <div class="navbar-menu">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#blog">Blog</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+
+    <header class="header">
+        <h1>Leon - Web Developer</h1>
+        <p>Creating beautiful and functional websites</p>
+    </header>
+
+    <div class="container">
+        <section id="about" class="section">
+            <h2>About Me</h2>
+            <p>Hello! I'm Leon, a passionate web developer from Germany. I specialize in creating dynamic and beautiful web pages. My goal is to combine technical proficiency with creativity to provide engaging and effective web solutions.</p>
+        </section>
+
+        <section id="projects" class="section">
+            <h2>Projects</h2>
+            <div class="carousel projects">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" alt="Project One">
+                    <h3>Project One</h3>
+                    <p>A brief description of Project One. It's a web app built with React and Node.js.</p>
+                    <div class="tags">
+                        <span>React</span><span>Node.js</span><span>CSS</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" alt="Project Two">
+                    <h3>Project Two</h3>
+                    <p>A brief description of Project Two. It's a responsive website designed with HTML5 and CSS3.</p>
+                    <div class="tags">
+                        <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" alt="Project Three">
+                    <h3>Project Three</h3>
+                    <p>A brief description of Project Three. It's an e-commerce platform built with Shopify and Liquid.</p>
+                    <div class="tags">
+                        <span>Shopify</span><span>Liquid</span><span>JavaScript</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <h2>Skills</h2>
+            <div class="skills">
+                <div class="skill">
+                    <i class="fab fa-html5"></i>
+                    <h3>HTML5</h3>
+                    <p>Proficient in HTML5 for building the structure of web pages.</p>
+                </div>
+                <div class="skill">
+                    <i class="fab fa-css3-alt"></i>
+                    <h3>CSS3</h3>
+                    <p>Experienced in using CSS3 for designing and styling web pages.</p>
+                </div>
+                <div class="skill">
+                    <i class="fab fa-js-square"></i>
+                    <h3>JavaScript</h3>
+                    <p>Skilled in JavaScript for adding interactivity to web pages.</p>
+                </div>
+                <div class="skill">
+                    <i class="fab fa-react"></i>
+                    <h3>React</h3>
+                    <p>Experienced in building web applications using React.js.</p>
+                </div>
+                <div class="skill">
+                    <i class="fab fa-node-js"></i>
+                    <h3>Node.js</h3>
+                    <p>Proficient in server-side development with Node.js.</p>
+                </div>
+                <div class="skill">
+                    <i class="fab fa-shopify"></i>
+                    <h3>Shopify</h3>
+                    <p>Skilled in building e-commerce platforms with Shopify.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog" class="section">
+            <h2>Blog</h2>
+            <div class="carousel blog">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" alt="Blog Post One">
+                    <h3>Blog Post One</h3>
+                    <p>A brief description of Blog Post One. It's about web development trends in 2024.</p>
+                    <div class="tags">
+                        <span>Web Development</span><span>Trends</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" alt="Blog Post Two">
+                    <h3>Blog Post Two</h3>
+                    <p>A brief description of Blog Post Two. It's about mastering CSS Grid and Flexbox.</p>
+                    <div class="tags">
+                        <span>CSS</span><span>Grid</span><span>Flexbox</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" alt="Blog Post Three">
+                    <h3>Blog Post Three</h3>
+                    <p>A brief description of Blog Post Three. It's about the future of JavaScript frameworks.</p>
+                    <div class="tags">
+                        <span>JavaScript</span><span>Frameworks</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <h2>Contact</h2>
+            <p>If you want to get in touch, feel free to <a href="mailto:leon@example.com">email me</a> or reach out via social media.</p>
+            <div class="contact-form">
+                <form action="#" method="post">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="social-icons">
+            <a href="https://twitter.com/leondev" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://github.com/leondev" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/leondev" target="_blank"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <p>&copy; 2024 Leon Dev. All rights reserved.</p>
+    </footer>
+
+    <!-- External Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script>
+        function toggleMenu() {
+            const navbarMenu = document.querySelector('.navbar-menu');
+            navbarMenu.classList.toggle('active');
+        }
+
+        $(document).ready(function() {
+            $('.carousel').slick({
+                dots: true,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 1,
+                adaptiveHeight: true,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            infinite: true,
+                            dots: true
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+</body>
+
+</html>
